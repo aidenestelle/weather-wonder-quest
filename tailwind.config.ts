@@ -61,7 +61,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                // Weather themed colors
+                weather: {
+                    sky: '#33C3F0',
+                    cloud: '#F6F6F7',
+                    sun: '#FEF7CD',
+                    rain: '#D3E4FD',
+                    thunder: '#8B5CF6',
+                    snow: '#F1F0FB',
+                    fog: '#FFDEE2',
+                    wind: '#E5DEFF'
+                },
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +95,58 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+                'float': {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' }
+                },
+                'pulse-gentle': {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0.7' }
+                },
+                'spin-slow': {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' }
+                },
+                'slide-in-right': {
+                    '0%': { transform: 'translateX(100%)', opacity: '0' },
+                    '100%': { transform: 'translateX(0)', opacity: '1' }
+                },
+                'slide-in-left': {
+                    '0%': { transform: 'translateX(-100%)', opacity: '0' },
+                    '100%': { transform: 'translateX(0)', opacity: '1' }
+                },
+                'slide-in-up': {
+                    '0%': { transform: 'translateY(100%)', opacity: '0' },
+                    '100%': { transform: 'translateY(0)', opacity: '1' }
+                },
+                'bounce-gentle': {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-5px)' }
+                },
+                'raindrop': {
+                    '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                    '50%': { opacity: '1' },
+                    '100%': { transform: 'translateY(30px)', opacity: '0' }
+                },
+                'snowfall': {
+                    '0%': { transform: 'translate(0, -10px) rotate(0deg)', opacity: '0' },
+                    '50%': { opacity: '1' },
+                    '100%': { transform: 'translate(10px, 30px) rotate(180deg)', opacity: '0' }
+                }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'float': 'float 4s ease-in-out infinite',
+                'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite',
+                'spin-slow': 'spin-slow 8s linear infinite',
+                'slide-in-right': 'slide-in-right 0.5s ease-out',
+                'slide-in-left': 'slide-in-left 0.5s ease-out',
+                'slide-in-up': 'slide-in-up 0.5s ease-out',
+                'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+                'raindrop': 'raindrop 1.5s linear infinite',
+                'snowfall': 'snowfall 3s linear infinite'
 			}
 		}
 	},

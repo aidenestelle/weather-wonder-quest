@@ -89,7 +89,7 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast }) => {
                       </div>
                       <WeatherAnimation weatherType={day.weather[0].main} size="lg" />
                       <div className="mt-3 text-lg font-bold">{Math.round(day.temp.day)}°C</div>
-                      <div className="capitalize text-sm">{day.weather[0].description}</div>
+                      <div className="capitalize text-sm max-w-[140px] text-center truncate">{day.weather[0].description}</div>
                     </div>
 
                     <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 w-full">
@@ -120,7 +120,7 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast }) => {
                         <div className="grid grid-cols-2 gap-2">
                           <div className="flex items-center gap-2">
                             <Droplets className="h-4 w-4 text-blue-500" />
-                            <span className="text-sm">Humidity: {day.humidity}%</span>
+                            <span className="text-sm">Humidity: {Math.round(day.humidity)}%</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <Wind className="h-4 w-4 text-blue-400" />
@@ -128,13 +128,13 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast }) => {
                           </div>
                           <div className="flex items-center gap-2">
                             <CloudRain className="h-4 w-4 text-blue-500" />
-                            <span className="text-sm">Precipitation: {Math.round(day.pop * 100)}%</span>
+                            <span className="text-sm">Precip: {Math.round(day.pop * 100)}%</span>
                           </div>
                           {(day.rain || day.snow) && (
                             <div className="flex items-center gap-2">
                               <CloudRain className="h-4 w-4 text-blue-600" />
-                              <span className="text-sm">
-                                {day.rain ? `Rain: ${day.rain.toFixed(1)} mm` : `Snow: ${day.snow!.toFixed(1)} mm`}
+                              <span className="text-sm truncate">
+                                {day.rain ? `Rain: ${Math.round(day.rain)} mm` : `Snow: ${Math.round(day.snow!)} mm`}
                               </span>
                             </div>
                           )}

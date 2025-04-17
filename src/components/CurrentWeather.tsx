@@ -60,8 +60,8 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
           <div className="flex-grow text-center md:text-left">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
               <div>
-                <h2 className="text-2xl font-bold">{city}{country ? `, ${country}` : ''}</h2>
-                <p className="text-lg font-medium capitalize">{weather.description}</p>
+                <h2 className="text-2xl font-bold truncate max-w-[200px] md:max-w-none">{city}{country ? `, ${country}` : ''}</h2>
+                <p className="text-lg font-medium capitalize truncate max-w-[200px] md:max-w-none">{weather.description}</p>
               </div>
               
               <Badge 
@@ -85,7 +85,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
               <div className="flex-1 grid grid-cols-2 gap-3">
                 <div className="flex items-center gap-1.5">
                   <Droplets className="h-4 w-4 text-blue-600" />
-                  <span>{weather.humidity}%</span>
+                  <span>{Math.round(weather.humidity)}%</span>
                 </div>
                 
                 <div className="flex items-center gap-1.5">
@@ -111,7 +111,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
                 {weather.rain && (
                   <div className="flex items-center gap-1.5">
                     <CloudRain className="h-4 w-4 text-blue-500" />
-                    <span>{weather.rain['1h']} mm</span>
+                    <span>{Math.round(weather.rain['1h'])} mm</span>
                   </div>
                 )}
               </div>

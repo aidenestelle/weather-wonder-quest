@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ForecastItem } from '@/types/weather';
 import WeatherAnimation from './WeatherAnimation';
@@ -29,9 +29,9 @@ const ForecastCard: React.FC<ForecastCardProps> = ({ forecast, isSelected, onCli
   const hasPrecipitation = forecast.pop > 0.3;
   
   const precipitationAmount = forecast.rain ? 
-    `${forecast.rain.toFixed(1)} mm rain` : 
+    `${Math.round(forecast.rain)} mm rain` : 
     forecast.snow ? 
-    `${forecast.snow.toFixed(1)} mm snow` : 
+    `${Math.round(forecast.snow)} mm snow` : 
     '';
 
   return (
@@ -44,7 +44,7 @@ const ForecastCard: React.FC<ForecastCardProps> = ({ forecast, isSelected, onCli
       `}
       onClick={onClick}
     >
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex flex-col items-center">
           <div className="text-sm font-medium text-gray-500 mb-1">{formatDay(forecast.dt)}</div>
           <div className="text-xs text-gray-400 mb-2">{formatDate(forecast.dt)}</div>
@@ -69,7 +69,7 @@ const ForecastCard: React.FC<ForecastCardProps> = ({ forecast, isSelected, onCli
           <div className="w-full flex justify-between text-xs mt-2">
             <div className="flex items-center">
               <Droplets className="h-3 w-3 mr-1 text-blue-500" />
-              <span>{forecast.humidity}%</span>
+              <span>{Math.round(forecast.humidity)}%</span>
             </div>
             <div className="flex items-center">
               <Wind className="h-3 w-3 mr-1 text-blue-400" />
@@ -79,11 +79,11 @@ const ForecastCard: React.FC<ForecastCardProps> = ({ forecast, isSelected, onCli
           
           {hasPrecipitation && (
             <div className="w-full text-center mt-2 text-xs">
-              <div className="bg-blue-100 text-blue-800 rounded-full px-2 py-0.5">
+              <div className="bg-blue-100 text-blue-800 rounded-full px-2 py-0.5 truncate">
                 {Math.round(forecast.pop * 100)}% chance
               </div>
               {precipitationAmount && (
-                <div className="text-blue-600 mt-1">{precipitationAmount}</div>
+                <div className="text-blue-600 mt-1 truncate">{precipitationAmount}</div>
               )}
             </div>
           )}

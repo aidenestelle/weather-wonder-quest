@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ForecastItem } from '@/types/weather';
 import WeatherAnimation from './WeatherAnimation';
 import { Droplets, Wind, ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ForecastCardProps {
   forecast: ForecastItem;
@@ -12,9 +13,11 @@ interface ForecastCardProps {
 }
 
 const ForecastCard: React.FC<ForecastCardProps> = ({ forecast, isSelected, onClick }) => {
+  const isMobile = useIsMobile();
+  
   const formatDay = (timestamp: number) => {
     const date = new Date(timestamp * 1000);
-    return new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date);
+    return new Intl.DateTimeFormat('en-US', { weekday: isMobile ? 'short' : 'short' }).format(date);
   };
 
   const formatDate = (timestamp: number) => {
@@ -37,7 +40,7 @@ const ForecastCard: React.FC<ForecastCardProps> = ({ forecast, isSelected, onCli
   return (
     <Card 
       className={`
-        transition-all duration-300 cursor-pointer transform hover:scale-105
+        transition-all duration-300 cursor-pointer transform hover:scale-105 h-full
         ${isSelected ? 
           'border-primary shadow-lg scale-105' : 
           'hover:shadow-md'}

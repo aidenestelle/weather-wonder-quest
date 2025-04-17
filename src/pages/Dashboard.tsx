@@ -27,6 +27,7 @@ import {
   Wind
 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Dashboard = () => {
   const { weatherData, loading, error, refreshWeather, setLocation } = useWeather();
@@ -46,6 +47,7 @@ const Dashboard = () => {
   const [savedLocations, setSavedLocations] = useState<WeatherLocation[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<WeatherLocation | null>(null);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   // Load initial data
   useEffect(() => {
@@ -136,16 +138,17 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-          <ThermometerSun className="h-8 w-8 text-blue-500" />
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4 md:mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-2">
+          <ThermometerSun className="h-6 w-6 md:h-8 md:w-8 text-blue-500" />
           <span>Weather Wonder Quest</span>
         </h1>
         
         <Button 
           onClick={handleRefreshWeather}
           className="mt-2 md:mt-0"
+          size={isMobile ? "sm" : "default"}
         >
           <RefreshCw className="h-4 w-4 mr-2" /> Refresh Weather
         </Button>
@@ -153,7 +156,7 @@ const Dashboard = () => {
 
       {weatherData && (
         <>
-          <div className="mb-6">
+          <div className="mb-4 md:mb-6">
             <CurrentWeather 
               weather={weatherData.current}
               city={weatherData.location.name}
@@ -162,7 +165,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6 mb-4 md:mb-6">
             <div className="lg:col-span-3">
               <WeatherForecast forecast={weatherData.forecast} />
             </div>
@@ -178,8 +181,8 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="mb-6">
-            <TabsList className="grid grid-cols-3 mb-4 md:w-[400px]">
+          <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="mb-4 md:mb-6">
+            <TabsList className="grid grid-cols-3 mb-4 w-full md:w-[400px]">
               <TabsTrigger value="weather" className="flex items-center gap-1">
                 <Sun className="h-4 w-4" /> Weather
               </TabsTrigger>
@@ -192,44 +195,44 @@ const Dashboard = () => {
             </TabsList>
             
             <TabsContent value="weather" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 flex items-center gap-3">
-                  <div className="bg-blue-200/50 p-2 rounded-full">
-                    <ThermometerSun className="h-6 w-6 text-blue-700" />
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-3 md:p-4 flex items-center gap-2 md:gap-3">
+                  <div className="bg-blue-200/50 p-1.5 md:p-2 rounded-full">
+                    <ThermometerSun className="h-4 w-4 md:h-6 md:w-6 text-blue-700" />
                   </div>
                   <div>
                     <div className="text-xs text-blue-700 font-medium">Temperature</div>
-                    <div className="text-xl font-bold">{Math.round(weatherData.current.temp)}°C</div>
+                    <div className="text-lg md:text-xl font-bold">{Math.round(weatherData.current.temp)}°C</div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg p-4 flex items-center gap-3">
-                  <div className="bg-indigo-200/50 p-2 rounded-full">
-                    <Droplets className="h-6 w-6 text-indigo-700" />
+                <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg p-3 md:p-4 flex items-center gap-2 md:gap-3">
+                  <div className="bg-indigo-200/50 p-1.5 md:p-2 rounded-full">
+                    <Droplets className="h-4 w-4 md:h-6 md:w-6 text-indigo-700" />
                   </div>
                   <div>
                     <div className="text-xs text-indigo-700 font-medium">Humidity</div>
-                    <div className="text-xl font-bold">{weatherData.current.humidity}%</div>
+                    <div className="text-lg md:text-xl font-bold">{weatherData.current.humidity}%</div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 flex items-center gap-3">
-                  <div className="bg-purple-200/50 p-2 rounded-full">
-                    <Wind className="h-6 w-6 text-purple-700" />
+                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-3 md:p-4 flex items-center gap-2 md:gap-3">
+                  <div className="bg-purple-200/50 p-1.5 md:p-2 rounded-full">
+                    <Wind className="h-4 w-4 md:h-6 md:w-6 text-purple-700" />
                   </div>
                   <div>
                     <div className="text-xs text-purple-700 font-medium">Wind Speed</div>
-                    <div className="text-xl font-bold">{Math.round(weatherData.current.wind_speed * 3.6)} km/h</div>
+                    <div className="text-lg md:text-xl font-bold">{Math.round(weatherData.current.wind_speed * 3.6)} km/h</div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg p-4 flex items-center gap-3">
-                  <div className="bg-cyan-200/50 p-2 rounded-full">
-                    <CloudRain className="h-6 w-6 text-cyan-700" />
+                <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg p-3 md:p-4 flex items-center gap-2 md:gap-3">
+                  <div className="bg-cyan-200/50 p-1.5 md:p-2 rounded-full">
+                    <CloudRain className="h-4 w-4 md:h-6 md:w-6 text-cyan-700" />
                   </div>
                   <div>
                     <div className="text-xs text-cyan-700 font-medium">Conditions</div>
-                    <div className="text-xl font-bold capitalize">{weatherData.current.main}</div>
+                    <div className="text-lg md:text-xl font-bold capitalize truncate">{weatherData.current.main}</div>
                   </div>
                 </div>
               </div>

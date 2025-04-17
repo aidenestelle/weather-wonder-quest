@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Cloud, CloudDrizzle, CloudRain, CloudSnow, Sun, CloudLightning, CloudFog, Wind } from 'lucide-react';
+import { Cloud, CloudDrizzle, CloudRain, CloudSnow, Sun, CloudLightning, CloudFog, Wind, CloudSun, Snowflake, Cloudy } from 'lucide-react';
 
 interface WeatherAnimationProps {
   weatherType: string;
@@ -96,7 +96,10 @@ const WeatherAnimation: React.FC<WeatherAnimationProps> = ({ weatherType, size =
     if (weather.includes('cloud')) {
       return (
         <div className="relative">
-          <Cloud className={`${baseClass} animate-float text-weather-cloud`} />
+          <div className="absolute -top-2 -right-2">
+            <Sun className={`${sizeClass} text-yellow-400 opacity-70 animate-pulse-gentle`} />
+          </div>
+          <CloudSun className={`${baseClass} animate-float text-weather-cloud`} />
         </div>
       );
     }
@@ -104,7 +107,7 @@ const WeatherAnimation: React.FC<WeatherAnimationProps> = ({ weatherType, size =
     // Default fallback
     return (
       <div className="relative">
-        <Cloud className={`${baseClass} animate-float text-weather-cloud`} />
+        <Cloudy className={`${baseClass} animate-float text-weather-cloud`} />
       </div>
     );
   };

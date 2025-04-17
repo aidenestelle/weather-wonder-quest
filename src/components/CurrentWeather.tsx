@@ -13,6 +13,7 @@ import {
   CloudRain 
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface CurrentWeatherProps {
   weather: CurrentWeatherType;
@@ -27,6 +28,8 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   country, 
   onRefresh 
 }) => {
+  const isMobile = useIsMobile();
+  
   const formatTime = (timestamp: number) => {
     return new Date(timestamp * 1000).toLocaleTimeString([], { 
       hour: '2-digit', 
@@ -46,13 +49,26 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   };
 
   return (
-    <Card className={`overflow-hidden shadow-lg ${getWeatherColor()} border-none`}>
-      <CardContent className="p-6">
-        <div className="flex flex-col md:flex-row items-center gap-6">
+    <Card className={`overflow-hidden shadow-lg ${getWeatherColor()} border-none relative`}>
+      {/* Weather Animation Background */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2">
+          <WeatherAnimation weatherType={weather.main} size="xl" />
+        </div>
+        <div className="absolute top-2/3 right-1/4 transform translate-x-1/2 -translate-y-1/2">
+          <WeatherAnimation weatherType={weather.main} size="xl" />
+        </div>
+        <div className="absolute bottom-1/4 left-2/3 transform -translate-x-1/2 translate-y-1/2">
+          <WeatherAnimation weatherType={weather.main} size="lg" />
+        </div>
+      </div>
+      
+      <CardContent className="p-4 md:p-6 relative z-10">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
           <div className="flex-shrink-0">
             <WeatherAnimation 
               weatherType={weather.main} 
-              size="xl" 
+              size={isMobile ? "lg" : "xl"} 
               className="mb-4 md:mb-0" 
             />
           </div>
@@ -60,8 +76,8 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
           <div className="flex-grow text-center md:text-left">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
               <div>
-                <h2 className="text-2xl font-bold truncate max-w-[200px] md:max-w-none">{city}{country ? `, ${country}` : ''}</h2>
-                <p className="text-lg font-medium capitalize truncate max-w-[200px] md:max-w-none">{weather.description}</p>
+                <h2 className="text-xl md:text-2xl font-bold truncate max-w-[200px] md:max-w-none">{city}{country ? `, ${country}` : ''}</h2>
+                <p className="text-md md:text-lg font-medium capitalize truncate max-w-[200px] md:max-w-none">{weather.description}</p>
               </div>
               
               <Badge 
@@ -75,14 +91,14 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
             
             <div className="flex flex-col md:flex-row gap-4 md:gap-8">
               <div className="flex-1">
-                <div className="text-5xl font-bold mb-2">{Math.round(weather.temp)}°C</div>
+                <div className="text-4xl md:text-5xl font-bold mb-2">{Math.round(weather.temp)}°C</div>
                 <div className="flex gap-2 items-center text-sm">
                   <ThermometerSun className="h-4 w-4" />
                   <span>Feels like {Math.round(weather.feels_like)}°C</span>
                 </div>
               </div>
               
-              <div className="flex-1 grid grid-cols-2 gap-3">
+              <div className="flex-1 grid grid-cols-2 gap-2 md:gap-3">
                 <div className="flex items-center gap-1.5">
                   <Droplets className="h-4 w-4 text-blue-600" />
                   <span>{Math.round(weather.humidity)}%</span>

@@ -1,73 +1,63 @@
-# Welcome to your Lovable project
 
-## Project info
+# Weather Wonder Quest 🌦️🎮
 
-**URL**: https://lovable.dev/projects/1836f5a7-ce14-4e34-a01e-bee6d17a5486
+## Overview
+Weather Wonder Quest transforms weather tracking into an exciting, interactive game-like experience. Discover weather data through engaging animations, challenges, and achievements!
 
-## How can I edit this code?
+## Features
+- 🌈 Dynamic Weather Visualization
+- 🏆 Gamification Elements
+  - Daily Check-ins
+  - Weather-based Challenges
+  - Streak Tracking
+  - Collectible Achievements
+- 📍 Multi-location Support
+- 🎲 Weather-themed Mini-games
 
-There are several ways of editing your application.
+## Prerequisites
+- Node.js (v18+)
+- npm or Bun
+- OpenWeatherMap API Key
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1836f5a7-ce14-4e34-a01e-bee6d17a5486) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### 1. Clone the Repository
+```bash
+git clone https://your-repo-url.git
+cd weather-wonder-quest
 ```
 
-**Edit a file directly in GitHub**
+### 2. Install Dependencies
+```bash
+npm install
+# or
+bun install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. Set Up Environment Variables
+1. Copy `.env.example` to `.env`
+2. Add your OpenWeatherMap API Key
 
-**Use GitHub Codespaces**
+### 4. Run the Application
+```bash
+npm run dev
+# or
+bun run dev
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## API Configuration
+This project uses OpenWeatherMap for real-time weather data. 
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
+## Technologies
 - React
-- shadcn-ui
+- TypeScript
 - Tailwind CSS
+- Shadcn UI
+- React Query
+- OpenWeatherMap API
 
-## How can I deploy this project?
+## Contribution
+Contributions are welcome! Please read our contributing guidelines before getting started.
 
-Simply open [Lovable](https://lovable.dev/projects/1836f5a7-ce14-4e34-a01e-bee6d17a5486) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## License
+[Your License, e.g., MIT]
